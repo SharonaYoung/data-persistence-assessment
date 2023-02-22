@@ -18,8 +18,8 @@ search.addEventListener('submit', async function(event){
   console.log(data.name);
   console.log(data.main.temp);
   showWeather(data);
-  console.log(data.weather);
-  console.log(JSON.stringify(data));
+  console.log(data.weather[0].main);
+  console.log(JSON.stringify(data.weather));
 });
 
 // display weather info to the DOM
@@ -28,13 +28,12 @@ const weatherEL = document.querySelector('#weather');
   function showWeather(weatherData) {
     const displayWeather = `
       <h2>${weatherData.name}</h2>
-      <h3>Temperature: </h3>
+      <h3>Current Temperature: ${Math.round(weatherData.main.temp)} </h3>
       <ul>
-        <li>Current Temperature: ${weatherData.main.temp}</li>
-        <li>Low: ${weatherData.main.temp_min}</li>
-        <li>High: ${weatherData.main.temp_max}</li>
+        <li>Low: ${Math.round(weatherData.main.temp_min)}</li>
+        <li>High: ${Math.round(weatherData.main.temp_max)}</li>
       </ul>
-      <h3>Weather Conditions: ${weatherData.weather.value}</h3>
+      <h3>Weather Conditions: ${weatherData.weather[0].description}</h3>
   `
   weatherEL.innerHTML = displayWeather;
 }
